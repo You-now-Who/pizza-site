@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link';
 
 function Nav() {
   return (
@@ -9,12 +8,12 @@ function Nav() {
           <span className="font-bold text-xl text-[#4e342e]">404's PIZZA</span>
         </div>
         <nav className="hidden md:flex gap-8 text-[#4e342e] font-medium">
-          <Link href="/" className="hover:text-[#ff2222]">
+          <a href="#" className="hover:text-[#ff2222]">
             Home
-          </Link>
-          <Link href="/recipes" className="hover:text-[#ff2222]">
+          </a>
+          <a href="#" className="hover:text-[#ff2222]">
             Recipes
-          </Link>
+          </a>
           <a href="#" className="hover:text-[#ff2222]">
             About
           </a>
