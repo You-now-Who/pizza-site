@@ -16,9 +16,9 @@ function Nav() {
           <Link href="/recipes" className="hover:text-[#ff2222]">
             Recipes
           </Link>
-          <Link href="#" className="hover:text-[#ff2222]">
+          {/* <Link href="#" className="hover:text-[#ff2222]">
             About
-          </Link>
+          </Link> */}
         </nav>
         <button
           className="bg-[#ff2222] hover:bg-[#e61919d2] text-white px-4 py-2 rounded-xl text-sm font-semibold"

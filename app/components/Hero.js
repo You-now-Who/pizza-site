@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 function Hero() {
   return (
@@ -11,11 +12,11 @@ function Hero() {
           <span className="text-[#4e342e]"> Recipes...</span>
         </h1>
         <p className="text-md text-[#5d4037] max-w-md">
-          ... that will make nona cry! Super cursed pizza recipees I could find 💀!
+          ... that you've never seen before! Some of the most cursed combinations I could find over the interwebs.
         </p>
-        <button className="bg-[#ff2222] hover:bg-[#e61919d2] text-white text-sm font-bold px-6 py-3 rounded-xl">
+        <Link className="bg-[#ff2222] hover:bg-[#e61919d2] text-white text-sm font-bold px-6 py-3 rounded-xl" href="/recipes">
           BROWSE RECIPES
-        </button>
+        </Link>
       </div>
 
       <div className="relative w-full max-w-md mx-auto">

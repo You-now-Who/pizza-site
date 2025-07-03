@@ -419,7 +419,7 @@ const RecipesPage = () => {
             Unconventional Pizza Recipes
           </h1>
           <p className="text-xl text-[#6d4c41] max-w-2xl mx-auto">
-            Discover 
+            Discover &quot;unique&quot; and &quot;unparalleled&quot; tastes for your tastebuds.
           </p>
         </div>
 
