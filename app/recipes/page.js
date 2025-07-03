@@ -416,11 +416,10 @@ const RecipesPage = () => {
       <section className="bg-[#fffdf6] pt-24 pb-16 relative">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-5xl font-bold text-[#4e342e] mb-6">
-            Pizza Recipes
+            Unconventional Pizza Recipes
           </h1>
           <p className="text-xl text-[#6d4c41] max-w-2xl mx-auto">
-            Discover authentic Italian recipes and create delicious pizzas at
-            home. From classic Margherita to creative specialty pies!
+            Discover 
           </p>
         </div>
 
