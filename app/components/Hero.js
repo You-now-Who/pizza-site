@@ -12,7 +12,7 @@ function Hero() {
           <span className="text-[#4e342e]"> Recipes...</span>
         </h1>
         <p className="text-md text-[#5d4037] max-w-md">
-          ... that you've never seen before! Some of the most cursed combinations I could find over the interwebs.
+          ... that you&apos;ve never seen before! Some of the most cursed combinations I could find over the interwebs.
         </p>
         <Link className="bg-[#ff2222] hover:bg-[#e61919d2] text-white text-sm font-bold px-6 py-3 rounded-xl" href="/recipes">
           BROWSE RECIPES
