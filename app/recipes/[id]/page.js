@@ -86,7 +86,7 @@ const RecipeDetailPage = () => {
         {/* <Nav /> */}
         <div className="container mx-auto px-6 pt-24 text-center">
           <h1 className="text-4xl font-bold text-[#4e342e] mb-4">Recipe Not Found</h1>
-          <p className="text-[#6d4c41] mb-8">Sorry, we couldn't find the recipe you're looking for.</p>
+          <p className="text-[#6d4c41] mb-8">Sorry, we couldn&apos;t find the recipe you&apos;re looking for.</p>
           <button 
             onClick={() => router.push('/recipes')}
             className="bg-[#d32f2f] text-white px-6 py-3 rounded-lg hover:bg-[#b71c1c] transition-colors duration-300"
