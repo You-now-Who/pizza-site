@@ -112,7 +112,7 @@ const PizzaCarousel = () => {
 
       <div className="container mx-auto px-6 mt-8">
         <h2 className="text-4xl font-bold text-white text-center mb-12">
-          Our Delicious Pizzas
+          Our "Delicious" Pizzas
         </h2>
 
         {loading ? (
