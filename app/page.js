@@ -2,15 +2,14 @@
 import React from "react";
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
+import PizzaCarousel from "./components/PizzaCarousel";
 
 function Home() {
-  return (
-    <main className="bg-[#fffdf6] text-[#4e342e] font-sans relative overflow-hidden">
-      <Nav/>
-
+return (
+    <>
       <Hero/>
-
-    </main>
+      <PizzaCarousel/>
+    </>
   );
 }
 
