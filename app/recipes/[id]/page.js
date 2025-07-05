@@ -22,6 +22,9 @@ export default function RecipeDetailPage({ params }) {
     notFound();
   }
 
+  // Get the original Spoonacular data
+  const spoonacularData = recipe.spoonacularData;
+
   const formatTime = (minutes) => {
     if (minutes >= 60) {
       const hours = Math.floor(minutes / 60);
@@ -51,7 +54,7 @@ export default function RecipeDetailPage({ params }) {
     return cleanText;
   };
 
-  const instructions = parseInstructions(recipe.instructions);
+  const instructions = parseInstructions(spoonacularData.instructions);
 
   return (
     <div className="bg-[#fffdf6] min-h-screen">
@@ -73,7 +76,7 @@ export default function RecipeDetailPage({ params }) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl lg:text-5xl font-bold text-[#4e342e] mb-6">
-                {recipe.title}
+                {spoonacularData.title}
               </h1>
               
               <div className="flex flex-wrap gap-6 mb-6 text-[#6d4c41]">
@@ -81,46 +84,46 @@ export default function RecipeDetailPage({ params }) {
                   <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
                   </svg>
-                  <span>{formatTime(recipe.readyInMinutes)}</span>
+                  <span>{formatTime(spoonacularData.readyInMinutes)}</span>
                 </div>
                 
                 <div className="flex items-center">
                   <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
                   </svg>
-                  <span>Serves {recipe.servings}</span>
+                  <span>Serves {spoonacularData.servings}</span>
                 </div>
                 
                 <div className="flex items-center">
                   <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>{getDifficultyLevel(recipe.healthScore, recipe.readyInMinutes)}</span>
+                  <span>{getDifficultyLevel(spoonacularData.healthScore, spoonacularData.readyInMinutes)}</span>
                 </div>
               </div>
               
               <div className="flex flex-wrap gap-3 mb-8">
-                {recipe.vegetarian && (
+                {spoonacularData.vegetarian && (
                   <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
                     Vegetarian
                   </span>
                 )}
-                {recipe.vegan && (
+                {spoonacularData.vegan && (
                   <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
                     Vegan
                   </span>
                 )}
-                {recipe.glutenFree && (
+                {spoonacularData.glutenFree && (
                   <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
                     Gluten Free
                   </span>
                 )}
-                {recipe.dairyFree && (
+                {spoonacularData.dairyFree && (
                   <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium">
                     Dairy Free
                   </span>
                 )}
-                {recipe.veryHealthy && (
+                {spoonacularData.veryHealthy && (
                   <span className="px-3 py-1 bg-[#ffc107] bg-opacity-20 text-[#4e342e] rounded-full text-sm font-medium">
                     Very Healthy
                   </span>
@@ -130,19 +133,19 @@ export default function RecipeDetailPage({ params }) {
               <div className="flex items-center gap-4 mb-6">
                 <div className="flex items-center">
                   <span className="text-2xl text-[#ffc107] mr-1">❤️</span>
-                  <span className="text-[#6d4c41]">{recipe.aggregateLikes} likes</span>
+                  <span className="text-[#6d4c41]">{spoonacularData.aggregateLikes} likes</span>
                 </div>
                 <div className="flex items-center">
                   <span className="text-2xl text-green-500 mr-1">💚</span>
-                  <span className="text-[#6d4c41]">Health Score: {recipe.healthScore}/100</span>
+                  <span className="text-[#6d4c41]">Health Score: {spoonacularData.healthScore}/100</span>
                 </div>
               </div>
             </div>
             
             <div className="relative">
               <img 
-                src={recipe.image} 
-                alt={recipe.title}
+                src={spoonacularData.image} 
+                alt={spoonacularData.title}
                 className="w-full h-96 object-cover rounded-2xl shadow-2xl"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
@@ -174,14 +177,14 @@ export default function RecipeDetailPage({ params }) {
                 Ingredients
               </h2>
               <div className="space-y-4">
-                {recipe.extendedIngredients.map((ingredient, index) => (
+                {spoonacularData.extendedIngredients && spoonacularData.extendedIngredients.map((ingredient, index) => (
                   <div key={index} className="flex items-start space-x-3">
                     <span className="w-2 h-2 bg-[#d32f2f] rounded-full mt-2 flex-shrink-0"></span>
                     <div className="flex-1">
                       <span className="text-[#4e342e] font-medium">
                         {ingredient.amount} {ingredient.unit} {ingredient.name}
                       </span>
-                      {ingredient.meta.length > 0 && (
+                      {ingredient.meta && ingredient.meta.length > 0 && (
                         <span className="text-[#6d4c41] text-sm ml-2">
                           ({ingredient.meta.join(', ')})
                         </span>
@@ -222,28 +225,28 @@ export default function RecipeDetailPage({ params }) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="text-center p-4 bg-[#fffdf6] rounded-lg">
                 <div className="text-2xl font-bold text-[#d32f2f] mb-2">
-                  ${(recipe.pricePerServing / 100).toFixed(2)}
+                  ${(spoonacularData.pricePerServing / 100).toFixed(2)}
                 </div>
                 <div className="text-[#6d4c41] text-sm">Price per serving</div>
               </div>
               <div className="text-center p-4 bg-[#fffdf6] rounded-lg">
                 <div className="text-2xl font-bold text-[#d32f2f] mb-2">
-                  {recipe.healthScore}/100
+                  {spoonacularData.healthScore}/100
                 </div>
                 <div className="text-[#6d4c41] text-sm">Health Score</div>
               </div>
               <div className="text-center p-4 bg-[#fffdf6] rounded-lg">
                 <div className="text-2xl font-bold text-[#d32f2f] mb-2">
-                  {recipe.aggregateLikes}
+                  {spoonacularData.aggregateLikes}
                 </div>
                 <div className="text-[#6d4c41] text-sm">People liked this</div>
               </div>
             </div>
             
-            {recipe.sourceUrl && (
+            {spoonacularData.sourceUrl && (
               <div className="mt-6 text-center">
                 <a 
-                  href={recipe.sourceUrl}
+                  href={spoonacularData.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-6 py-3 bg-[#d32f2f] text-white rounded-lg hover:bg-[#b71c1c] transition-colors duration-300"
