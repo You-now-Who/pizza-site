@@ -468,7 +468,8 @@ const RecipesPage = () => {
               {filteredRecipes.map((recipe) => (
                 <div
                   key={recipe.id}
-                  className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+                  id={recipe.id}
+                  className="recipe bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
                   onClick={() => openRecipeDetail(recipe)}
                 >
                   <img
