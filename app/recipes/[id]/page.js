@@ -1,43 +1,25 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import { useParams, useRouter } from "next/navigation";
+import React from "react";
+import { notFound } from "next/navigation";
 import Nav from "../../components/Nav";
+import { getStaticRecipesData } from "../../lib/recipes";
 
-const RecipeDetailPage = () => {
-  const [recipe, setRecipe] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const params = useParams();
-  const router = useRouter();
+// Generate static params for all recipes at build time
+export async function generateStaticParams() {
+  const { recipes } = getStaticRecipesData();
+  return recipes.map((recipe) => ({
+    id: recipe.id.toString(),
+  }));
+}
+
+// Static recipe detail page
+export default function RecipeDetailPage({ params }) {
+  const { recipes } = getStaticRecipesData();
   const recipeId = parseInt(params.id);
+  const recipe = recipes.find((r) => r.id === recipeId);
 
-  useEffect(() => {
-    const fetchRecipe = async () => {
-      try {
-        const response = await fetch('/pizza_detail.json');
-        if (!response.ok) {
-          throw new Error('Failed to fetch recipes');
-        }
-        const recipes = await response.json();
-        const foundRecipe = recipes.find(r => r.id === recipeId);
-        
-        if (!foundRecipe) {
-          setError('Recipe not found');
-        } else {
-          setRecipe(foundRecipe);
-        }
-      } catch (err) {
-        setError('Failed to load recipe');
-        console.error('Error fetching recipe:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (recipeId) {
-      fetchRecipe();
-    }
-  }, [recipeId]);
+  if (!recipe) {
+    notFound();
+  }
 
   const formatTime = (minutes) => {
     if (minutes >= 60) {
@@ -68,54 +50,24 @@ const RecipeDetailPage = () => {
     return cleanText;
   };
 
-  if (loading) {
-    return (
-      <div className="bg-[#fffdf6] min-h-screen flex items-center justify-center">
-        {/* <Nav /> */}
-        <div className="text-center pt-24">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#d32f2f] mx-auto mb-4"></div>
-          <p className="text-[#6d4c41] text-lg">Loading delicious recipe...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error || !recipe) {
-    return (
-      <div className="bg-[#fffdf6] min-h-screen">
-        {/* <Nav /> */}
-        <div className="container mx-auto px-6 pt-24 text-center">
-          <h1 className="text-4xl font-bold text-[#4e342e] mb-4">Recipe Not Found</h1>
-          <p className="text-[#6d4c41] mb-8">Sorry, we couldn&apos;t find the recipe you&apos;re looking for.</p>
-          <button 
-            onClick={() => router.push('/recipes')}
-            className="bg-[#d32f2f] text-white px-6 py-3 rounded-lg hover:bg-[#b71c1c] transition-colors duration-300"
-          >
-            Back to Recipes
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   const instructions = parseInstructions(recipe.instructions);
 
   return (
     <div className="bg-[#fffdf6] min-h-screen">
-      {/* <Nav /> */}
+      <Nav />
       
       {/* Hero Section */}
       <section className="pt-24 pb-8">
         <div className="container mx-auto px-6">
-          <button 
-            onClick={() => router.push('/recipes')}
+          <a 
+            href="/recipes"
             className="flex items-center text-[#6d4c41] hover:text-[#4e342e] transition-colors duration-300 mb-6"
           >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
             Back to Recipes
-          </button>
+          </a>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -305,6 +257,4 @@ const RecipeDetailPage = () => {
       </section>
     </div>
   );
-};
-
-export default RecipeDetailPage;
+}
