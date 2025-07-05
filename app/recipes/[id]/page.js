@@ -178,11 +178,9 @@ export default function RecipeDetailPage({ params }) {
             </div>
 
             <div className="relative">
-              <Image
+              <img
                 src={spoonacularData.image}
                 alt={spoonacularData.title}
-                width={600}
-                height={400}
                 className="w-full h-96 object-cover rounded-2xl shadow-2xl"
                 priority
               />
