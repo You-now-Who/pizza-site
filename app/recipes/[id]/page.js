@@ -2,6 +2,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 import Nav from "../../components/Nav";
 import { getStaticRecipesData } from "../../lib/recipes";
+import Link from "next/link";
 
 // Generate static params for all recipes at build time
 export async function generateStaticParams() {
@@ -59,7 +60,7 @@ export default function RecipeDetailPage({ params }) {
       {/* Hero Section */}
       <section className="pt-24 pb-8">
         <div className="container mx-auto px-6">
-          <a 
+          <Link 
             href="/recipes"
             className="flex items-center text-[#6d4c41] hover:text-[#4e342e] transition-colors duration-300 mb-6"
           >
@@ -67,7 +68,7 @@ export default function RecipeDetailPage({ params }) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
             Back to Recipes
-          </a>
+          </Link>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
