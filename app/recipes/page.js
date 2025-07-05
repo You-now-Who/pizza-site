@@ -9,7 +9,6 @@ export default function RecipesPage() {
 
   return (
     <div className="bg-[#fffdf6] min-h-screen">
-      <Nav />
 
       {/* Hero Section with Server-Rendered Content */}
       <section className="bg-[#fffdf6] pt-24 pb-16 relative">
@@ -35,7 +34,7 @@ export default function RecipesPage() {
             {categories.map((category) => (
               <div
                 key={category.id}
-                className="px-6 py-3 rounded-full bg-white bg-opacity-20 text-white font-medium"
+                className="px-6 py-3 rounded-full bg-white bg-opacity-20 text-[#4e342e] font-medium"
               >
                 {category.name}
               </div>
